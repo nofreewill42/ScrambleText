@@ -1,5 +1,5 @@
 
-import numpy as np
+import random
 #from tokenizers import ByteLevelBPETokenizer
 from pathlib import Path
 
@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     #bbpe_tokenizer = ByteLevelBPETokenizer.from_file(f'{tokenizer_path}/vocab.json', f'{tokenizer_path}/merges.txt')
 
-    text = '''While Large Language Models (LLMs) have
+    text = '''While Large Language Models ( LLMs ) have
 achieved remarkable performance in many
 tasks, much about their inner workings remains
 unclear. In this study, we present novel experimental insights into the resilience of LLMs, particularly GPT-4, when subjected to extensive
@@ -38,10 +38,10 @@ resilience despite severe disruption to input tokenization caused by scrambled t
     ws = []
     for word in words:
         chars_num = len(word)
-        if chars_num <= 5:
+        if chars_num <= 3:
             w = word
         else:
-            w = word[:1] + ''.join(np.random.permutation(list(word[1:-1]))) + word[-1:]
+            w = word[:1] + ''.join(random.sample(word[1:-1], len(word)-2)) + word[-1:]
         ws.append(w)
         
     scrambled_text = ' '.join(ws)
